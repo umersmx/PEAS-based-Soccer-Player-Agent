@@ -1,0 +1,294 @@
+import random
+
+class SoccerEnvironment:
+    """
+    Represents the soccer game environment, simulating dynamic elements
+    and providing sensor data to the agent.
+    """
+
+    def __init__(self, field_width=100, field_height=70):
+        """
+        Initializes the soccer environment.
+
+        Args:
+            field_width (int): The width of the soccer field.
+            field_height (int): The height of the soccer field.
+        """
+        self.field_width = field_width
+        self.field_height = field_height
+        self.ball_position = (random.uniform(0, field_width), random.uniform(0, field_height))
+        self.own_goal_position = (0, field_height / 2)
+        self.opponent_goal_position = (field_width, field_height / 2)
+        self.player_position = (random.uniform(0, field_width), random.uniform(0, field_height))
+        self.opponent_position = (random.uniform(0, field_width), random.uniform(0, field_height))
+        
+        # Initialize dynamic sensor data with random values
+        self._update_random_values()
+
+    def _update_random_values(self):
+        """
+        Updates dynamic environmental factors with random values.
+        This simulates the constantly changing nature of a soccer game.
+        """
+        self.distance_from_ball = random.uniform(0, 50)  # Distance from the agent's current position to the ball
+        self.distance_from_goal = random.uniform(0, 70)  # Distance from the agent's current position to the opponent's goal
+        self.distance_from_opponent = random.uniform(0, 30) # Distance from the agent's current position to a nearby opponent
+        self.ball_velocity = (random.uniform(-5, 5), random.uniform(-5, 5))
+        self.time_remaining = random.randint(0, 90) # Game time remaining in minutes
+        self.score = {'ours': random.randint(0, 3), 'theirs': random.randint(0, 3)}
+
+    def update_environment(self):
+        """
+        Simulates the passage of time and dynamic changes in the environment.
+        This method should be called periodically to refresh the environment's state.
+        """
+        # Simulate ball and player movement (simplified for this example)
+        # Ensures ball stays within field boundaries
+        self.ball_position = (
+            (self.ball_position[0] + self.ball_velocity[0]) % self.field_width,
+            (self.ball_position[1] + self.ball_velocity[1]) % self.field_height
+        )
+        # Update random values to simulate continuous change
+        self._update_random_values()
+        print("Environment updated dynamically.")
+
+    def get_sensor_data(self):
+        """
+        Returns a dictionary containing the current sensor readings from the environment.
+
+        Returns:
+            dict: A dictionary of sensor data.
+        """
+        sensor_data = {
+            'player_position': self.player_position,
+            'ball_position': self.ball_position,
+            'ball_velocity': self.ball_velocity,
+            'opponent_position': self.opponent_position,
+            'distance_from_ball': self.distance_from_ball,
+            'distance_from_goal': self.distance_from_goal,
+            'distance_from_opponent': self.distance_from_opponent,
+            'time_remaining': self.time_remaining,
+            'score': self.score,
+            'field_dimensions': (self.field_width, self.field_height),
+            'own_goal_position': self.own_goal_position,
+            'opponent_goal_position': self.opponent_goal_position
+        }
+        return sensor_data
+
+    def display_environment_state(self):
+        """
+        Prints a snapshot of the current environment state for debugging or visualization.
+        """
+        print("\n--- Current Environment State ---")
+        print(f"Field Dimensions: {self.field_width}x{self.field_height}")
+        print(f"Player Position: ({self.player_position[0]:.2f}, {self.player_position[1]:.2f})")
+        print(f"Ball Position: ({self.ball_position[0]:.2f}, {self.ball_position[1]:.2f})")
+        print(f"Opponent Position: ({self.opponent_position[0]:.2f}, {self.opponent_position[1]:.2f})")
+        print(f"Distance to Ball: {self.distance_from_ball:.2f} units")
+        print(f"Distance to Opponent Goal: {self.distance_from_goal:.2f} units")
+        print(f"Distance to Nearest Opponent: {self.distance_from_opponent:.2f} units")
+        print(f"Ball Velocity: ({self.ball_velocity[0]:.2f}, {self.ball_velocity[1]:.2f})")
+        print(f"Time Remaining: {self.time_remaining} minutes")
+        print(f"Score: Our team {self.score['ours']} - Opponent {self.score['theirs']}")
+        print("-----------------------------------")
+
+
+class PerceptionModule:
+    """
+    Simulates the Perception Module: gathers and processes raw sensor data.
+    """
+    def __init__(self):
+        self._raw_sensor_data = None
+        self._processed_perception = None
+
+    def sense_environment(self, raw_data):
+        """
+        Stores the raw sensor data received from the environment.
+        """
+        self._raw_sensor_data = raw_data
+
+    def process_sensory_data(self):
+        """
+        Processes raw sensor data into a structured format.
+        For this simple implementation, we just return the raw data.
+        """
+        # In a real system, this would involve complex filtering, object recognition, etc.
+        self._processed_perception = self._raw_sensor_data
+        return self._processed_perception
+
+    def get_perception(self):
+        """
+        Returns the last processed perceptual information.
+        """
+        return self._processed_perception
+
+
+class WorldModel:
+    """
+    Simulates the World Model: maintains an internal representation of the game state.
+    """
+    def __init__(self):
+        self._current_state = {}
+
+    def update_state(self, perceptual_data):
+        """
+        Integrates new perceptual data to update the internal game state.
+        """
+        self._current_state.update(perceptual_data)
+
+    def get_state(self):
+        """
+        Returns the current understanding of the game state.
+        """
+        return self._current_state
+
+
+class DecisionMakingModule:
+    """
+    Simulates the Decision-Making Module: determines the optimal action based on game state.
+    Applies simple rule-based logic.
+    """
+    def __init__(self):
+        # Define thresholds for decision rules
+        self.FAR_THRESHOLD = 20
+        self.NEAR_GOAL_THRESHOLD = 10
+        self.OPPONENT_CLOSE_THRESHOLD = 5
+
+    def make_decision(self, game_state):
+        """
+        Applies rule-based logic to decide the agent's next action.
+
+        Args:
+            game_state (dict): The current state of the game from the WorldModel.
+
+        Returns:
+            str: The chosen action (e.g., 'move_towards_ball', 'shoot', 'pass', 'dribble').
+        """
+        distance_from_ball = game_state.get('distance_from_ball', float('inf'))
+        distance_from_goal = game_state.get('distance_from_goal', float('inf'))
+        distance_from_opponent = game_state.get('distance_from_opponent', float('inf'))
+
+        if distance_from_ball > self.FAR_THRESHOLD:
+            return 'move_towards_ball'
+        elif distance_from_goal < self.NEAR_GOAL_THRESHOLD:
+            return 'shoot'
+        elif distance_from_opponent < self.OPPONENT_CLOSE_THRESHOLD:
+            return 'pass'
+        else:
+            return 'dribble'
+
+
+class ActionExecutionModule:
+    """
+    Simulates the Action Execution Module: translates abstract actions into concrete commands.
+    """
+    def __init__(self):
+        pass
+
+    def execute_action(self, action):
+        """
+        Executes a high-level action. In this simulation, it just prints the action.
+
+        Args:
+            action (str): The abstract action decided by the DecisionMakingModule.
+        """
+        print(f"Executing action: {action}")
+
+
+class SoccerAgent:
+    """
+    Orchestrates the intelligent soccer player agent's behavior loop.
+    """
+
+    def __init__(self):
+        """
+        Initializes the agent's modules and performance score.
+        """
+        self.perception_module = PerceptionModule()
+        self.world_model = WorldModel()
+        self.decision_making_module = DecisionMakingModule()
+        self.action_execution_module = ActionExecutionModule()
+        self._performance_score = 0
+        print("SoccerAgent initialized.")
+
+    def _update_performance(self, action):
+        """
+        Updates the agent's performance score based on the executed action.
+        (Simplified: arbitrary score updates for demonstration).
+        """
+        if action == 'shoot':
+            self._performance_score += 10 # Reward for attempting to score
+        elif action == 'pass':
+            self._performance_score += 5  # Reward for teamwork
+        elif action == 'move_towards_ball' or action == 'dribble':
+            self._performance_score += 1  # Reward for general activity
+        # Penalties could also be added, e.g., for 'out_of_bounds' actions
+
+    def run_step(self, raw_environment_data):
+        """
+        Executes one full cycle of the agent's behavior (sense, process, model, decide, act).
+
+        Args:
+            raw_environment_data (dict): Raw sensor readings from the environment.
+
+        Returns:
+            str: The action taken by the agent.
+        """
+        # 1. Sense environment
+        self.perception_module.sense_environment(raw_environment_data)
+
+        # 2. Process sensory data
+        processed_data = self.perception_module.process_sensory_data()
+
+        # 3. Update world model
+        self.world_model.update_state(processed_data)
+
+        # 4. Make decision
+        current_game_state = self.world_model.get_state()
+        action = self.decision_making_module.make_decision(current_game_state)
+
+        # 5. Execute action
+        self.action_execution_module.execute_action(action)
+
+        # 6. Update performance score
+        self._update_performance(action)
+
+        # Print action and updated performance
+        print(f"Agent decided: {action}")
+        print(f"Current Performance Score: {self._performance_score}")
+        print("-----------------------------------")
+
+        return action
+
+def main():
+    """
+    Main function to run the soccer agent simulation.
+    """
+    print("\n--- Starting Soccer Agent Simulation ---")
+
+    # Initialize the environment and the agent
+    env = SoccerEnvironment()
+    agent = SoccerAgent()
+
+    # Run the simulation for a number of steps
+    num_steps = 10
+    for step in range(num_steps):
+        print(f"\n=== Simulation Step {step + 1}/{num_steps} ===")
+
+        # 1. Get raw sensor data from the environment
+        raw_env_data = env.get_sensor_data()
+        
+        # 2. Agent runs one full cycle (sense, process, model, decide, act, update performance)
+        agent.run_step(raw_env_data)
+
+        # 3. Update the environment for the next step
+        env.update_environment()
+
+        # Print environment state after agent's action and environment update
+        env.display_environment_state()
+
+    print("\n--- Simulation Ended ---")
+    print(f"Final Agent Performance Score: {agent._performance_score}")
+
+if __name__ == "__main__":
+    main()
