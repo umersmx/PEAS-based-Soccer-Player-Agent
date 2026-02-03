@@ -1,0 +1,205 @@
+--- Starting Soccer Agent Simulation ---
+SoccerAgent initialized.
+
+=== Simulation Step 1/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 1
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (39.58, 33.23)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 30.15 units
+Distance to Opponent Goal: 41.05 units
+Distance to Nearest Opponent: 15.95 units
+Ball Velocity: (2.71, 2.36)
+Time Remaining: 32 minutes
+Score: Our team 0 - Opponent 0
+-----------------------------------
+
+=== Simulation Step 2/10 ===
+Executing action: move_towards_ball
+Agent decided: move_towards_ball
+Current Performance Score: 2
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (42.29, 35.59)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 7.64 units
+Distance to Opponent Goal: 59.25 units
+Distance to Nearest Opponent: 28.41 units
+Ball Velocity: (4.35, -1.05)
+Time Remaining: 19 minutes
+Score: Our team 1 - Opponent 0
+-----------------------------------
+
+=== Simulation Step 3/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 3
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (46.64, 34.55)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 49.31 units
+Distance to Opponent Goal: 47.36 units
+Distance to Nearest Opponent: 9.68 units
+Ball Velocity: (0.89, -3.86)
+Time Remaining: 72 minutes
+Score: Our team 1 - Opponent 2
+-----------------------------------
+
+=== Simulation Step 4/10 ===
+Executing action: move_towards_ball
+Agent decided: move_towards_ball
+Current Performance Score: 4
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (47.53, 30.69)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 16.87 units
+Distance to Opponent Goal: 28.00 units
+Distance to Nearest Opponent: 17.02 units
+Ball Velocity: (1.32, 2.93)
+Time Remaining: 35 minutes
+Score: Our team 2 - Opponent 0
+-----------------------------------
+
+=== Simulation Step 5/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 5
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (48.86, 33.62)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 4.48 units
+Distance to Opponent Goal: 68.76 units
+Distance to Nearest Opponent: 29.27 units
+Ball Velocity: (-2.48, 3.12)
+Time Remaining: 81 minutes
+Score: Our team 2 - Opponent 3
+-----------------------------------
+
+=== Simulation Step 6/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 6
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (46.38, 36.75)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 49.83 units
+Distance to Opponent Goal: 6.99 units
+Distance to Nearest Opponent: 4.64 units
+Ball Velocity: (2.92, 1.99)
+Time Remaining: 2 minutes
+Score: Our team 1 - Opponent 2
+-----------------------------------
+
+=== Simulation Step 7/10 ===
+Executing action: move_towards_ball
+Agent decided: move_towards_ball
+Current Performance Score: 7
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (49.29, 38.73)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 19.56 units
+Distance to Opponent Goal: 40.60 units
+Distance to Nearest Opponent: 16.60 units
+Ball Velocity: (-0.97, 0.51)
+Time Remaining: 45 minutes
+Score: Our team 1 - Opponent 0
+-----------------------------------
+
+=== Simulation Step 8/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 8
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (48.32, 39.24)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 38.31 units
+Distance to Opponent Goal: 65.28 units
+Distance to Nearest Opponent: 27.26 units
+Ball Velocity: (0.91, 4.48)
+Time Remaining: 55 minutes
+Score: Our team 3 - Opponent 3
+-----------------------------------
+
+=== Simulation Step 9/10 ===
+Executing action: move_towards_ball
+Agent decided: move_towards_ball
+Current Performance Score: 9
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (49.23, 43.72)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 15.27 units
+Distance to Opponent Goal: 33.87 units
+Distance to Nearest Opponent: 21.77 units
+Ball Velocity: (-0.48, 2.85)
+Time Remaining: 90 minutes
+Score: Our team 1 - Opponent 1
+-----------------------------------
+
+=== Simulation Step 10/10 ===
+Executing action: dribble
+Agent decided: dribble
+Current Performance Score: 10
+-----------------------------------
+Environment updated dynamically.
+
+--- Current Environment State ---
+Field Dimensions: 100x70
+Player Position: (31.63, 43.40)
+Ball Position: (48.75, 46.57)
+Opponent Position: (88.30, 34.30)
+Distance to Ball: 30.16 units
+Distance to Opponent Goal: 59.90 units
+Distance to Nearest Opponent: 13.84 units
+Ball Velocity: (-1.44, -1.91)
+Time Remaining: 36 minutes
+Score: Our team 3 - Opponent 3
+-----------------------------------
+
+--- Simulation Ended ---
+Final Agent Performance Score: 10
